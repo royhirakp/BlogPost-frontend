@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const PostCard = (props) => {
   // console.log(props);
+  const navigate = useNavigate();
   const { id, userId, title, body, userEmail } = props.item;
 
   async function deletePost() {
@@ -13,10 +15,13 @@ const PostCard = (props) => {
       };
       const body = { id: id };
       console.log(body, config);
-      const res = await axios.delete("http://localhost:5000/api/v1/post", {
-        ...config,
-        data: body,
-      });
+      const res = await axios.delete(
+        "https://blogpost-xbzq.onrender.com/api/v1/post",
+        {
+          ...config,
+          data: body,
+        }
+      );
       console.log("delete res==", res);
       props.setRelode((pre) => pre + 1);
     } catch (error) {
@@ -32,9 +37,21 @@ const PostCard = (props) => {
       }}
     >
       <div className="buttonConatiner">
-        <button>edit</button>
+        <button
+          onClick={() => {
+            navigate("../fullpost");
+          }}
+        >
+          edit
+        </button>
         <button onClick={deletePost}>delete</button>
-        <button>open Comments</button>
+        <button
+          onClick={() => {
+            navigate("../fullpost");
+          }}
+        >
+          open Comments
+        </button>
       </div>
       <div style={{}}>
         <p>id: {id}</p>

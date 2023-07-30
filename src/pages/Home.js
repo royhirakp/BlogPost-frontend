@@ -3,7 +3,9 @@ import Register from "../components/Register";
 import Button from "@mui/material/Button";
 import CreatePost from "../components/CreatePost";
 import ShowPostMain from "../components/ShowPostMain";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
   const [refresh, setRefesh] = useState(1);
   const [createPostStatus, setCreatePostStatus] = useState(false);
   return (
@@ -13,7 +15,15 @@ const Home = () => {
         {/* <Register /> */}
 
         {/* logout and create post er button login howar por dhaka jabe.  login howar por registerComponent muche jabe  */}
-        <Button style={{ margin: "2px", float: "right" }} variant="contained">
+        <Button
+          style={{ margin: "2px", float: "right" }}
+          variant="contained"
+          onClick={() => {
+            console.log("logout");
+            localStorage.removeItem("jwtTokenW");
+            navigate("../");
+          }}
+        >
           logout
         </Button>
       </div>

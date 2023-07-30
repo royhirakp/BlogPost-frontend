@@ -5,12 +5,12 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const CreatePost = () => {
+const CreatePost = (props) => {
   const [title, setTitel] = useState("");
   const [bodyinput, setbody] = useState("");
   const [postStatus, setPostSattus] = useState({});
   const navigate = useNavigate();
-
+  // console.log(props.setRefesh);
   const handelSubmit = async () => {
     // console.log("buttonclick", title, bodyinput);
     try {
@@ -32,10 +32,12 @@ const CreatePost = () => {
       );
       console.log(res.data);
       setPostSattus(res.data);
+      props.setRefesh((pre) => pre + 1);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div>
       <div

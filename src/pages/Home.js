@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import CreatePost from "../components/CreatePost";
 import ShowPostMain from "../components/ShowPostMain";
 const Home = () => {
+  const [refresh, setRefesh] = useState(1);
   const [createPostStatus, setCreatePostStatus] = useState(false);
   return (
     <>
@@ -23,11 +24,11 @@ const Home = () => {
         >
           {createPostStatus ? "cancle " : "Create Post"}
         </Button>
-        {createPostStatus ? <CreatePost /> : ""}
+        {createPostStatus ? <CreatePost setRefesh={setRefesh} /> : ""}
       </div>
 
       {/* Main component  */}
-      <ShowPostMain />
+      <ShowPostMain refresh={refresh} />
     </>
   );
 };

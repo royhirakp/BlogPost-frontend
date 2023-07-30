@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./card/PostCard";
 import axios from "axios";
-const ShowPostMain = () => {
+const ShowPostMain = (props) => {
   const [data, setData] = useState([]);
+  const [reloded, setRelode] = useState(1);
   async function showData() {
     try {
       const config = {
@@ -24,7 +25,7 @@ const ShowPostMain = () => {
 
   useEffect(() => {
     showData();
-  }, []);
+  }, [reloded, props.refresh]);
   return (
     <div>
       <div
@@ -34,7 +35,7 @@ const ShowPostMain = () => {
         {data.map((item, i) => {
           return (
             <div key={i * 0.252}>
-              <PostCard item={item} />
+              <PostCard item={item} setRelode={setRelode} />
             </div>
           );
         })}

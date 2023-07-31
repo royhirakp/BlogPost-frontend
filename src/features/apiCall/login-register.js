@@ -21,8 +21,17 @@ export const userLoginRegister = createApi({
           };
         },
       }),
+      singup: builder.mutation({
+        query(body) {
+          return {
+            url: "/singup",
+            method: "POST",
+            body: body,
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useLoginMutation } = userLoginRegister;
+export const { useLoginMutation, useSingupMutation } = userLoginRegister;

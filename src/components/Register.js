@@ -4,20 +4,23 @@ import {
   addEmail,
   addPassword,
 } from "../features/email-password/email-PasswordSlice";
-import axios from "axios";
-import { useLoginMutation } from "../features/apiCall/login-register";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useLoginMutation,
+  useSingupMutation,
+} from "../features/apiCall/login-register";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const Register = () => {
-  const data = useSelector((s) => s.userInfo);
-  const navigate = useNavigate();
 
+const Register = () => {
+  // const data = useSelector((s) => s.userInfo);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [login, { isError, isLoading }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
+  const [singup, { isLoading: singUpLodingStatus, isSuccess }] =
+    useSingupMutation();
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
-
   const [LoginRegToggle, setToggleStatus] = useState(false);
 
   const hadelSubmit = async (status) => {
@@ -25,39 +28,31 @@ const Register = () => {
       console.log("submit", status, "=====", email, password);
       if (email === "" || password === "") {
         alert("give email and password");
-        console.log("alert");
-        //   //
         return;
       }
       const body = {
         email: email,
         password: password,
       };
-      console.log("****************function call");
       if (status === "singup") {
-        let singUpData = await axios.post(
-          "https://blogpost-xbzq.onrender.com/api/v1/user/singup",
-          body
-        );
-
-        console.log(singUpData);
+        let res = await singup(body);
+        console.log(res.data.messege);
         setError("");
       } else {
-        let logINdata = await axios.post(
-          "https://blogpost-xbzq.onrender.com/api/v1/user/login",
-          body
-        );
-        localStorage.setItem("jwtTokenW", logINdata.data.token);
+        let res = await login(body);
+        localStorage.setItem("jwtTokenW", res.data.token);
         setError("");
         navigate("../home");
       }
     } catch (error) {
-      // console.log(error.response);
       setError("erorr !!! sing up first / give right password / ");
     }
   };
+
   return (
     <div>
+      {isLoading ? "Loading...." : ""}
+      {singUpLodingStatus ? "Registring...." : ""}
       <form>
         <header style={{ display: "flex", flexDirection: "column" }}>
           <div className="textfildContainer">
@@ -111,7 +106,7 @@ const Register = () => {
 
           <br />
           {error}
-          {error}
+          {isSuccess ? "new user created" : ""}
         </header>
       </form>
     </div>

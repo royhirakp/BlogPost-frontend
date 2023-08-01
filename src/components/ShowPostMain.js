@@ -12,10 +12,7 @@ const ShowPostMain = (props) => {
         },
       };
 
-      const res = await axios.get(
-        "https://blogpost-xbzq.onrender.com/api/v1/post",
-        config
-      );
+      const res = await axios.get("http://16.171.192.21/api/v1/post", config);
       console.log(res.data.posts);
       setData(res.data.posts);
     } catch (error) {

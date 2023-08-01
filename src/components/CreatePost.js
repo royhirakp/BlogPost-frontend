@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useCallback } from "react";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreatePost = (props) => {
   const [title, setTitel] = useState("");
   const [bodyinput, setbody] = useState("");
   const [postStatus, setPostSattus] = useState({});
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // console.log(props.setRefesh);
   const handelSubmit = async () => {
     // console.log("buttonclick", title, bodyinput);
@@ -26,7 +26,7 @@ const CreatePost = (props) => {
       };
 
       const res = await axios.post(
-        "https://blogpost-xbzq.onrender.com/api/v1/post",
+        "http://16.171.192.21/api/v1/post",
         postbody,
         config
       );
@@ -55,7 +55,6 @@ const CreatePost = (props) => {
           variant="outlined"
           onChange={(e) => {
             setTitel(e.target.value);
-            console.log(e.target.value);
           }}
         />
         {/* <br /> */}

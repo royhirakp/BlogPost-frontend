@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userLoginRegister = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://blogpost-xbzq.onrender.com/api/v1/user",
+    baseUrl: "http://16.171.192.21/api/v1/user",
     prepareHeaders(headers) {
       headers.set("key", "data");
       return headers;

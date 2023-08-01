@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const PostCard = (props) => {
   // console.log(props);
   const navigate = useNavigate();
-  const { id, userId, title, body, userEmail } = props.item;
+  const { id, title, body, userEmail } = props.item;
 
   async function deletePost() {
     try {
@@ -14,15 +14,12 @@ const PostCard = (props) => {
         },
       };
       const body = { id: id };
-      console.log(body, config);
-      const res = await axios.delete(
-        "https://blogpost-xbzq.onrender.com/api/v1/post",
-        {
-          ...config,
-          data: body,
-        }
-      );
-      console.log("delete res==", res);
+      // console.log(body, config);
+      const res = await axios.delete("http://16.171.192.21/api/v1/post", {
+        ...config,
+        data: body,
+      });
+      // console.log("delete res==", res);
       props.setRelode((pre) => pre + 1);
     } catch (error) {
       console.log(error);

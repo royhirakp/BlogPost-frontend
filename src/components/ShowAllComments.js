@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CommentCard from "./card/CommentCard";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ const ShowAllComments = () => {
   const postdata = useSelector((s) => s.editCommentInfo);
   const { body, id, title, userEmail, userId } = postdata;
   // console.log(postdata);
+  const [commentData, setCommentData] = useState([]);
 
   const getComments = useCallback(async () => {
     try {
@@ -22,6 +23,7 @@ const ShowAllComments = () => {
       );
       // {headers:{},data:{}}
       console.log(res.data);
+      setCommentData(res.data);
       // setData(res.data.posts);
     } catch (error) {
       console.log(error);
@@ -39,10 +41,10 @@ const ShowAllComments = () => {
           <u>comments:</u>
         </b>
       </h1>
-      {[1, 2, 1].map((item, i) => {
+      {commentData.map((item, i) => {
         return (
           <div key={i * 0.252}>
-            <CommentCard />
+            <CommentCard item={item} />
           </div>
         );
       })}

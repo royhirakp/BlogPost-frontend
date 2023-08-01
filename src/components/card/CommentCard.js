@@ -15,7 +15,7 @@ const CommentCard = () => {
       </p>
       <p>
         <b>
-          <u>user: </u>
+          <u>user: static </u>
         </b>
         h@gm.com
       </p>

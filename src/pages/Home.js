@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Register from "../components/Register";
 import Button from "@mui/material/Button";
 import CreatePost from "../components/CreatePost";
@@ -8,11 +8,15 @@ const Home = () => {
   const navigate = useNavigate();
   const [refresh, setRefesh] = useState(1);
   const [createPostStatus, setCreatePostStatus] = useState(false);
+  useEffect(() => {
+    if (!localStorage.getItem("jwtTokenW")) {
+      navigate("../login");
+    }
+  }, []);
   return (
     <>
       <div>
         <p>Home page</p>
-        {/* <Register /> */}
 
         {/* logout and create post er button login howar por dhaka jabe.  login howar por registerComponent muche jabe  */}
         <Button
@@ -21,7 +25,7 @@ const Home = () => {
           onClick={() => {
             console.log("logout");
             localStorage.removeItem("jwtTokenW");
-            navigate("../");
+            navigate("../login");
           }}
         >
           logout

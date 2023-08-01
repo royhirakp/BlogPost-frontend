@@ -15,7 +15,7 @@ const PostCard = (props) => {
       };
       const body = { id: id };
       // console.log(body, config);
-      const res = await axios.delete("http://16.171.192.21/api/v1/post", {
+      await axios.delete("http://16.171.192.21/api/v1/post", {
         ...config,
         data: body,
       });

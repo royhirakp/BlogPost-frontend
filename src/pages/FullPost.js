@@ -4,6 +4,7 @@ import CreateComment from "../components/CreateComment";
 import ShowAllComments from "../components/ShowAllComments";
 
 const FullPost = () => {
+  // const { body, id, title, userEmail, userId } = data;
   return (
     <div>
       {/* {post update form } */}

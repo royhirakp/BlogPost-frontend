@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Register from "../components/Register";
+import { lazy, Suspense } from "react";
 import Button from "@mui/material/Button";
 import CreatePost from "../components/CreatePost";
-import ShowPostMain from "../components/ShowPostMain";
+// import ShowPostMain from "../components/ShowPostMain";
 import { useNavigate } from "react-router-dom";
+const LazyComponentShowPostMain = lazy(() =>
+  import("../components/ShowPostMain")
+);
+// import Register from "../components/Register";
+
 const Home = () => {
   const navigate = useNavigate();
   const [refresh, setRefesh] = useState(1);
@@ -25,6 +30,7 @@ const Home = () => {
           onClick={() => {
             console.log("logout");
             localStorage.removeItem("jwtTokenW");
+            localStorage.removeItem("webappLoginUserEmail");
             navigate("../login");
           }}
         >
@@ -42,7 +48,11 @@ const Home = () => {
       </div>
 
       {/* Main component  */}
-      <ShowPostMain refresh={refresh} />
+      <h2>All posts: </h2>
+
+      <Suspense fallback={<h1>Lazy Loading Component.....</h1>}>
+        <LazyComponentShowPostMain refresh={refresh} />
+      </Suspense>
     </>
   );
 };

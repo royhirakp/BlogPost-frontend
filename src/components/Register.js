@@ -25,7 +25,7 @@ const Register = () => {
 
   const hadelSubmit = async (status) => {
     try {
-      console.log("submit", status, "=====", email, password);
+      // console.log("submit", status, "=====", email, password);
       if (email === "" || password === "") {
         alert("give email and password");
         return;
@@ -41,6 +41,7 @@ const Register = () => {
       } else {
         let res = await login(body);
         localStorage.setItem("jwtTokenW", res.data.token);
+        localStorage.setItem("webappLoginUserEmail", email);
         setError("");
         navigate("../home");
       }

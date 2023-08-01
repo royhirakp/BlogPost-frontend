@@ -1,10 +1,13 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { addPostData } from "../../features/postDataForEditAndCommentPost/postData-Slice";
+import { useDispatch } from "react-redux";
 const PostCard = (props) => {
-  // console.log(props);
+  const dispatch = useDispatch();
+  // console.log(props, "from data postComponent");
   const navigate = useNavigate();
-  const { id, title, body, userEmail } = props.item;
+  const { id, userId, title, body, userEmail } = props.item;
 
   async function deletePost() {
     try {
@@ -25,6 +28,7 @@ const PostCard = (props) => {
       console.log(error);
     }
   }
+
   return (
     <div
       style={{
@@ -36,6 +40,8 @@ const PostCard = (props) => {
       <div className="buttonConatiner">
         <button
           onClick={() => {
+            dispatch(addPostData({ id, userId, title, body, userEmail }));
+
             navigate("../fullpost");
           }}
         >
@@ -44,6 +50,7 @@ const PostCard = (props) => {
         <button onClick={deletePost}>delete</button>
         <button
           onClick={() => {
+            dispatch(addPostData({ id, userId, title, body, userEmail }));
             navigate("../fullpost");
           }}
         >

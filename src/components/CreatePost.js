@@ -22,7 +22,7 @@ const CreatePost = (props) => {
       const postbody = {
         title: title,
         body: bodyinput,
-        userEmail: "email@reactfnd",
+        userEmail: localStorage.getItem("webappLoginUserEmail"),
       };
 
       const res = await axios.post(

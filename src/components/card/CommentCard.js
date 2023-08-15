@@ -2,7 +2,7 @@
 import React from "react";
 
 const CommentCard = (props) => {
-  const { id, postId, body, userEmail } = props.item;
+  const { body, userEmail } = props.item;
   return (
     <div style={{ border: "1px solid" }}>
       <p style={{ textAlign: "left", padding: "3px 43px 0 43px", margin: "0" }}>

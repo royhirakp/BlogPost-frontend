@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Info from "./card/Info";
 const ShowAllComments = (props) => {
   const postdata = useSelector((s) => s.editCommentInfo);
-  const { body, id, title, userEmail, userId } = postdata;
+  const { id } = postdata;
   const [commentData, setCommentData] = useState([]);
 
   const getComments = useCallback(async () => {
@@ -15,12 +15,10 @@ const ShowAllComments = (props) => {
           authorization: localStorage.getItem("jwtTokenW"),
         },
       };
-      // const body = { postId: "7" };
       const res = await axios.get(
         `http://16.171.192.21/api/v1/comment/${id}`,
         config
       );
-      // {headers:{},data:{}}
       setCommentData(res.data);
       // setData(res.data.posts);
     } catch (error) {

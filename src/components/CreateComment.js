@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Info from "./card/Info";
-const CreateComment = () => {
+const CreateComment = (props) => {
   const data = useSelector((s) => s.editCommentInfo);
   const { id, userEmail } = data;
   const [commentData, setCommentData] = useState("");
@@ -28,7 +28,7 @@ const CreateComment = () => {
         postbody,
         config
       );
-      console.log(res);
+      props.setNewComntTem((pre) => pre + 1);
       setcommentCreteStatus("comment Created");
       setTimeout(() => {
         setcommentCreteStatus("");

@@ -1,23 +1,21 @@
-import { Padding } from "@mui/icons-material";
+// import { Padding } from "@mui/icons-material";
 import React from "react";
 
-const CommentCard = () => {
+const CommentCard = (props) => {
+  const { id, postId, body, userEmail } = props.item;
   return (
     <div style={{ border: "1px solid" }}>
       <p style={{ textAlign: "left", padding: "3px 43px 0 43px", margin: "0" }}>
         <b>
           <u>comment:</u>
-        </b>{" "}
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam ipsa
-        aliquam inventore. Necessitatibus nostrum dolor culpa commodi blanditiis
-        eveniet atque officiis esse quas! Vero ullam, dolorum nemo illo suscipit
-        dignissimos. {""}
+        </b>
+        {body}
       </p>
       <p>
         <b>
-          <u>user: static </u>
+          <u>commented by: </u>
         </b>
-        h@gm.com
+        {userEmail}
       </p>
     </div>
   );

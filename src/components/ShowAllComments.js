@@ -3,10 +3,9 @@ import CommentCard from "./card/CommentCard";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Info from "./card/Info";
-const ShowAllComments = () => {
-  // const postdata = useSelector((s) => s.editCommentInfo);
-  // const { body, id, title, userEmail, userId } = postdata;
-  // console.log(postdata);
+const ShowAllComments = (props) => {
+  const postdata = useSelector((s) => s.editCommentInfo);
+  const { body, id, title, userEmail, userId } = postdata;
   const [commentData, setCommentData] = useState([]);
 
   const getComments = useCallback(async () => {
@@ -16,14 +15,12 @@ const ShowAllComments = () => {
           authorization: localStorage.getItem("jwtTokenW"),
         },
       };
-      const body = { postId: "5" };
+      // const body = { postId: "7" };
       const res = await axios.get(
-        "http://16.171.192.21/api/v1/comment",
-        config,
-        { data: body }
+        `http://16.171.192.21/api/v1/comment/${id}`,
+        config
       );
       // {headers:{},data:{}}
-      console.log(res.data);
       setCommentData(res.data);
       // setData(res.data.posts);
     } catch (error) {
@@ -33,7 +30,7 @@ const ShowAllComments = () => {
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, [props.newCommentStatus]);
 
   return (
     <div>
@@ -43,7 +40,7 @@ const ShowAllComments = () => {
           <u> Comments </u>
         </b>
       </h1>
-      {commentData.map((item, i) => {
+      {commentData?.data?.map((item, i) => {
         return (
           <div key={i * 0.252}>
             <CommentCard item={item} />

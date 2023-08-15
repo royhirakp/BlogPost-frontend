@@ -47,6 +47,12 @@ const CreatePost = (props) => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          border: "1px solid",
+          width: "300px",
+          margin: "5px auto",
+          border: "1px solid",
+          borderRadius: "15px",
+          padding: "52px 0 28px 0",
         }}
       >
         <TextField

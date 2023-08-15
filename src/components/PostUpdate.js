@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import Info from "./card/Info";
 const PostUpdate = () => {
   const postdata = useSelector((s) => s.editCommentInfo);
   const { body, id, title } = postdata;
@@ -10,8 +11,6 @@ const PostUpdate = () => {
 
   const updatePost = async () => {
     try {
-      // {id, title, body}
-      console.log(newPostBody, newTitle);
       const config = {
         headers: {
           authorization: localStorage.getItem("jwtTokenW"),
@@ -43,40 +42,70 @@ const PostUpdate = () => {
   };
 
   return (
-    <div
-      style={{
-        border: "1px solid",
-        borderRadius: "6px",
-        padding: "10px",
-        margin: "10px",
-        backgroundColor: "goldenrod",
-      }}
-    >
-      <p>Post</p>
-      <p>Title: {title}</p>
-      <p>Body: {body}</p>
-      <h3>update Post:</h3>
-      title
-      <input
-        type="text"
-        value={newTitle}
-        onChange={(e) => {
-          setNewTitle(e.target.value);
-          console.log(newTitle);
+    <>
+      <Info data=" 1. UPDATE a post:" />
+      <div
+        style={{
+          border: "1px solid",
+          borderRadius: "6px",
+          padding: "10px",
+          backgroundColor: "goldenrod",
+          display: "flex",
         }}
-      />
-      body
-      <input
-        type="text"
-        value={newPostBody}
-        onChange={(e) => {
-          setNewPostBody(e.target.value);
-          console.log(newPostBody);
-        }}
-      />
-      <button onClick={updatePost}>edit post</button>
+      >
+        <div
+          className="postData"
+          style={{
+            border: "1px solid",
+            marginBottom: "6px",
+            width: "450px",
+          }}
+        >
+          <h3 style={{ margin: "0", padding: "0" }}> Post:</h3>
+
+          <p>Title: {title}</p>
+          <p>Body: {body}</p>
+        </div>
+        <div
+          className="PostAComment"
+          style={{
+            border: "1px solid",
+            borderRadius: "5px",
+            width: "400px",
+            margin: "0 auto 0 auto",
+          }}
+        >
+          <h3 style={{ margin: "0", padding: "0" }}>Form for update Post:</h3>
+          title:
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => {
+              setNewTitle(e.target.value);
+              console.log(newTitle);
+            }}
+          />
+          <br />
+          body:
+          <input
+            type="text"
+            value={newPostBody}
+            onChange={(e) => {
+              setNewPostBody(e.target.value);
+              console.log(newPostBody);
+            }}
+          />
+          <br />
+          <button
+            style={{ cursor: "pointer", padding: "2px", margin: "5px" }}
+            onClick={updatePost}
+          >
+            edit post
+          </button>
+        </div>
+      </div>
       <h2>{postUpdateStatus}</h2>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import Info from "./card/Info";
 const CreateComment = () => {
   const data = useSelector((s) => s.editCommentInfo);
   const { id, userEmail } = data;
@@ -41,26 +42,29 @@ const CreateComment = () => {
     }
   }
   return (
-    <div
-      style={{
-        border: "1px solid",
-        margin: "12px 19px 1px",
-        padding: " 0px 0px 27px",
-        borderRadius: "120px",
-      }}
-    >
-      <h3>type your comment:</h3>
-      <form onSubmit={handelSubmit}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setCommentData(e.target.value);
-          }}
-        />
-        <button>Post the comment</button>
-      </form>
-      <p>{commentCreteStatus}</p>
-    </div>
+    <>
+      <Info data="2. Create a comment on a post" />
+      <div
+        style={{
+          border: "1px solid",
+          margin: "12px 19px 1px",
+          padding: " 0px 0px 27px",
+          borderRadius: "120px",
+        }}
+      >
+        <h3>type your comment:</h3>
+        <form onSubmit={handelSubmit}>
+          <input
+            type="text"
+            onChange={(e) => {
+              setCommentData(e.target.value);
+            }}
+          />
+          <button>Post the comment</button>
+        </form>
+        <p>{commentCreteStatus}</p>
+      </div>
+    </>
   );
 };
 

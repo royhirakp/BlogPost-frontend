@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import CreatePost from "../components/CreatePost";
 // import ShowPostMain from "../components/ShowPostMain";
 import { useNavigate } from "react-router-dom";
+import Info from "../components/card/Info";
 const LazyComponentShowPostMain = lazy(() =>
   import("../components/ShowPostMain")
 );
@@ -22,6 +23,7 @@ const Home = () => {
     <>
       <div>
         <p>Home page</p>
+        <Info data="1. CREATE a new post  & Logout " />
 
         {/* logout and create post er button login howar por dhaka jabe.  login howar por registerComponent muche jabe  */}
         <Button
@@ -48,6 +50,7 @@ const Home = () => {
       </div>
 
       {/* Main component  */}
+      <Info data=" 2. READ all posts" />
       <h2>All posts: </h2>
 
       <Suspense fallback={<h1>Lazy Loading Component.....</h1>}>

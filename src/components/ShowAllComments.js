@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import CommentCard from "./card/CommentCard";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Info from "./card/Info";
 const ShowAllComments = () => {
-  const postdata = useSelector((s) => s.editCommentInfo);
-  const { body, id, title, userEmail, userId } = postdata;
+  // const postdata = useSelector((s) => s.editCommentInfo);
+  // const { body, id, title, userEmail, userId } = postdata;
   // console.log(postdata);
   const [commentData, setCommentData] = useState([]);
 
@@ -36,9 +37,10 @@ const ShowAllComments = () => {
 
   return (
     <div>
+      <Info data=" 3. READ all Comments" />
       <h1>
         <b>
-          <u>comments:</u>
+          <u> Comments </u>
         </b>
       </h1>
       {commentData.map((item, i) => {

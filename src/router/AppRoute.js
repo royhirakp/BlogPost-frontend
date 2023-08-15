@@ -10,9 +10,7 @@ const AppRoute = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
-
           <Route path="/login" element={<LoginRegister />} />
-
           <Route path="/home" element={<Home />} />
           <Route path="/fullPost" element={<FullPost />} />
         </Routes>

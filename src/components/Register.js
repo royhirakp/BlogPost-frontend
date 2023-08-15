@@ -25,9 +25,8 @@ const Register = () => {
 
   const hadelSubmit = async (status) => {
     try {
-      // console.log("submit", status, "=====", email, password);
       if (email === "" || password === "") {
-        alert("give email and password");
+        alert("email and password fild can't be empty");
         return;
       }
       const body = {
@@ -36,28 +35,50 @@ const Register = () => {
       };
       if (status === "singup") {
         let res = await singup(body);
-        console.log(res.data.messege);
+        if (res.error) {
+          setError("user already exist ");
+          return;
+        }
         setError("");
       } else {
         let res = await login(body);
+        console.log(res);
+        if (res?.error?.data?.messege) {
+          setError("Password not matched");
+          return;
+        }
+        if (res?.error) {
+          setError("User not registered");
+          return;
+        }
         localStorage.setItem("jwtTokenW", res.data.token);
         localStorage.setItem("webappLoginUserEmail", email);
         setError("");
         navigate("../home");
       }
     } catch (error) {
-      setError("erorr !!! sing up first / give right password / ");
+      console.log(error);
     }
   };
 
   return (
     <div>
-      {isLoading ? "Loading...." : ""}
-      {singUpLodingStatus ? "Registring...." : ""}
+      {isLoading ? "Loading..." : ""}
+      {singUpLodingStatus ? "Creating new user...." : ""}
       <form>
-        <header style={{ display: "flex", flexDirection: "column" }}>
+        <header
+          style={{
+            display: "flex",
+            border: "1px solid",
+            width: "300px",
+            flexDirection: "column",
+            margin: "0 auto 0 auto",
+            borderRadius: "6px",
+          }}
+        >
+          <br />
           <div className="textfildContainer">
-            email
+            Email
             <input
               type="text"
               onChange={(e) => {
@@ -66,9 +87,10 @@ const Register = () => {
               }}
             />
             <br />
-            password
+            <br />
+            Password
             <input
-              type="text"
+              type="password"
               onChange={(e) => {
                 dispatch(addPassword(e.target.value));
                 setpassword(e.target.value);
@@ -76,35 +98,23 @@ const Register = () => {
             />
             <br />
           </div>
+          <br />
           <div className="ButtonContainer">
             <Button
               style={{ margin: "2px" }}
-              onClick={() => hadelSubmit("login")}
+              onClick={() => hadelSubmit("Login")}
               variant="contained"
             >
               Login
             </Button>
-            <a
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setToggleStatus(true);
-              }}
+            <Button
+              style={{ margin: "2px" }}
+              onClick={() => hadelSubmit("singup")}
+              variant="contained"
             >
-              {LoginRegToggle ? "" : "singUp ?"}
-            </a>
-            {LoginRegToggle ? (
-              <Button
-                style={{ margin: "2px" }}
-                onClick={() => hadelSubmit("singup")}
-                variant="contained"
-              >
-                Register
-              </Button>
-            ) : (
-              ""
-            )}
+              Register
+            </Button>
           </div>
-
           <br />
           {error}
           {isSuccess ? "new user created" : ""}
